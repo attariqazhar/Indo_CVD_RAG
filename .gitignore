@@ -2,3 +2,4 @@
 .env
 models
 data/backup
+__pycache__

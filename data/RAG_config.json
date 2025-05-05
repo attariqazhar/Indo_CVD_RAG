@@ -1,0 +1,57 @@
+[
+    {
+        "name": "combination_1",
+        "collection": "cvd_collection_v1",
+        "embedding_model": "nomic-embed-text",
+        "llm_model": "llama3.1",
+        "hyde": false
+    },
+    {
+        "name": "combination_2",
+        "collection": "cvd_collection_v1",
+        "embedding_model": "nomic-embed-text",
+        "llm_model": "deepseek-v2"
+    },
+    {
+        "name": "combination_3",
+        "collection": "cvd_collection_v2",
+        "embedding_model": "mxbai-embed-large",
+        "llm_model": "llama3.1",
+        "hyde": false
+    },
+    {
+        "name": "combination_4",
+        "collection": "cvd_collection_v2",
+        "embedding_model": "mxbai-embed-large",
+        "llm_model": "deepseek-v2",
+        "hyde": false
+    },
+    {
+        "name": "combination_5",
+        "collection": "cvd_collection_v2",
+        "embedding_model": "mxbai-embed-large",
+        "llm_model": "deepseek-v2",
+        "hyde": true
+    },
+    {
+        "name": "combination_6",
+        "collection": "cvd_collection_v2",
+        "embedding_model": "mxbai-embed-large",
+        "llm_model": "llama3.1",
+        "hyde": true
+    },
+    {
+        "name": "combination_7",
+        "collection": "cvd_collection_v2",
+        "embedding_model": "mxbai-embed-large",
+        "llm_model": "llama3.1",
+        "hyde": true
+    },
+    {
+        "name": "combination_8",
+        "collection": "cvd_collection_v2",
+        "embedding_model": "mxbai-embed-large",
+        "llm_model": "deepseek-v2",
+        "hyde": true
+    }
+]
