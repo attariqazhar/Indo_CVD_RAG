@@ -78,7 +78,7 @@ def generate_answer_dataset(url, api_key, collection_name, embedding_model_name,
         llm_answer = generation_pipeline(retrieved_documents, query, llm_name)
         eval_dict["answer"].append(llm_answer)
     
-    print(f"Answer generation finished.")
+    print(f"Answer generation is finished.")
 
     return eval_dict
 
