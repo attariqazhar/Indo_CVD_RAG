@@ -64,7 +64,7 @@ def generate_answer_dataset(url, api_key, collection_name, embedding_model_name,
 
     for index, row in eval_dataset.iterrows():
         # Print the progress
-        print(f"Evaluating row {index + 1}/{len_dataset}", flush=True, end="\r")
+        print(f"Row {index + 1}/{len_dataset}", flush=True, end="\r")
         eval_dict["question"].append(row["question"])
         eval_dict["ground_truth"].append(row["ground_truth"])
         query = row["question"]
@@ -78,7 +78,7 @@ def generate_answer_dataset(url, api_key, collection_name, embedding_model_name,
         llm_answer = generation_pipeline(retrieved_documents, query, llm_name)
         eval_dict["answer"].append(llm_answer)
     
-    print(f"Evaluation finished.")
+    print(f"Answer generation finished.")
 
     return eval_dict
 
@@ -105,7 +105,7 @@ def main():
         collection_name = config["collection"]
         embedding_model_name = config["embedding_model"]
         llm_name = config["llm_model"]
-        print(f"Evaluating {config_name}")
+        print(f"Generating answer for {config_name}")
         print(f"Collection      : {collection_name}")
         print(f"Embedding Model : {embedding_model_name}")
         print(f"LLM Model       : {llm_name}")
@@ -130,6 +130,6 @@ def main():
     
     # Simpan durasi evaluasi ke dalam file CSV
     duration_df = pd.DataFrame(evaluation_duration)
-    duration_df.to_csv('../../data/evaluation_duration.csv', index=False)
+    duration_df.to_csv('../../data/answer_duration.csv', index=False)
 
 main()
