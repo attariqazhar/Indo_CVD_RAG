@@ -1,0 +1,12 @@
+[
+    {
+        "collection": "cvd_collection_v1",
+        "embedding_model": "nomic-embed-text",
+        "backup_file_name": "documents_v1.json"
+    },
+    {
+        "collection": "cvd_collection_v2",
+        "embedding_model": "mxbai-embed-large",
+        "backup_file_name": "documents_v2.json"
+    }
+]
