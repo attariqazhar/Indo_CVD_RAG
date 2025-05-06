@@ -5,7 +5,8 @@
         "embedding_model": "nomic-embed-text",
         "llm_model": "llama3.1",
         "hyde": false,
-        "finished": true
+        "answer_finished": true,
+        "eval_finished": false
     },
     {
         "name": "combination_2",
@@ -13,7 +14,8 @@
         "embedding_model": "nomic-embed-text",
         "llm_model": "deepseek-v2",
         "hyde": false,
-        "finished": false
+        "answer_finished": false,
+        "eval_finished": false
     },
     {
         "name": "combination_3",
@@ -21,7 +23,8 @@
         "embedding_model": "mxbai-embed-large",
         "llm_model": "llama3.1",
         "hyde": false,
-        "finished": false
+        "answer_finished": false,
+        "eval_finished": false
     },
     {
         "name": "combination_4",
@@ -29,7 +32,8 @@
         "embedding_model": "mxbai-embed-large",
         "llm_model": "deepseek-v2",
         "hyde": false,
-        "finished": false
+        "answer_finished": false,
+        "eval_finished": false
     },
     {
         "name": "combination_5",
@@ -37,7 +41,8 @@
         "embedding_model": "nomic-embed-text",
         "llm_model": "llama3.1",
         "hyde": true,
-        "finished": false
+        "answer_finished": false,
+        "eval_finished": false
     },
     {
         "name": "combination_6",
@@ -45,7 +50,8 @@
         "embedding_model": "nomic-embed-text",
         "llm_model": "deepseek-v2",
         "hyde": true,
-        "finished": false
+        "answer_finished": false,
+        "eval_finished": false
     },
     {
         "name": "combination_7",
@@ -53,7 +59,8 @@
         "embedding_model": "mxbai-embed-large",
         "llm_model": "llama3.1",
         "hyde": true,
-        "finished": false
+        "answer_finished": false,
+        "eval_finished": false
     },
     {
         "name": "combination_8",
@@ -61,6 +68,7 @@
         "embedding_model": "mxbai-embed-large",
         "llm_model": "deepseek-v2",
         "hyde": true,
-        "finished": false
+        "answer_finished": false,
+        "eval_finished": false
     }
 ]

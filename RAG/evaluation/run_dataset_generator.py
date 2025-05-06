@@ -73,7 +73,7 @@ def generate_answer_dataset(url, api_key, collection_name, embedding_model_name,
         topic = row["topic"]
         hyde_response = None
         if hyde:
-            hyde_response = hypothesis_pipeline(query, topic)
+            hyde_response = hypothesis_pipeline(llm_name, query)
             hypothesis.append(hyde_response)
         retrieved_documents = retrieval_pipeline(url, api_key, collection_name, embedding_model_name, query, topic, hyde_response)
         eval_dict["retrieved_contexts"].append(retrieved_documents)
@@ -110,7 +110,7 @@ def main():
     }
 
     for config in configs:
-        if config['finished'] == False:
+        if config['answer_finished'] == False:
             config_name = config["name"]
             collection_name = config["collection"]
             embedding_model_name = config["embedding_model"]
@@ -129,7 +129,7 @@ def main():
             with open(f'../../data/{file_name}', 'w') as f:
                 json.dump(answer_json, f, indent=4)
             
-            config['finished'] = True
+            config['answer_finished'] = True
             with open(f'../../config/eval_configs.json', 'w') as f:
                 json.dump(configs, f, indent=4)
 
