@@ -1,0 +1,9 @@
+config,collection,embedding_model,llm_model,hyde,duration
+combination_1,cvd_collection_v1,nomic-embed-text,llama3.1,False,815.0
+combination_2,cvd_collection_v1,nomic-embed-text,deepseek-v2,False,827.9946148395538
+combination_3,cvd_collection_v2,mxbai-embed-large,llama3.1,False,1569.6092402935028
+combination_4,cvd_collection_v2,mxbai-embed-large,deepseek-v2,False,965.8475975990295
+combination_5,cvd_collection_v1,nomic-embed-text,llama3.1,True,1371.966792345047
+combination_6,cvd_collection_v1,nomic-embed-text,deepseek-v2,True,1313.6344106197355
+combination_7,cvd_collection_v2,mxbai-embed-large,llama3.1,True,1947.2026207447047
+combination_8,cvd_collection_v2,mxbai-embed-large,deepseek-v2,True,5828.543793678284

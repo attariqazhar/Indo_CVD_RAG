@@ -58,55 +58,65 @@ def evaluate_answers(config_name, llm_name, embedding_name, hyde=False):
     eval_results["context_precision"] = []
     eval_results["context_recall"] = []
 
+    # Mengambil informasi index terakhir dari hasil evaluasi sebelumnya
+    # Jika file CSV tidak ada, maka mulai dari index 0
+    # Hal ini agar evaluasi tidak terulang dari awal jika sudah pernah dievaluasi sebelumnya
+    try:
+        df = pd.read_csv(f'.../../data/evaluation_result_{config_name}.csv')
+        last_idx = len(df)
+    except FileNotFoundError:
+        last_idx = 0
+
     # Ubah jawaban menjadi format Dataset dari Hugging Face
     for i in range(len(answer_dataset["answer"])):
-        # Print the progress
-        print(f"Evaluating row {i + 1}/{len(answer_dataset['answer'])}", flush=True, end="\r")
-        answer_row = {
-            "question": [answer_dataset["question"][i]],
-            "ground_truth": [answer_dataset["ground_truth"][i]],
-            "retrieved_contexts": [answer_dataset["retrieved_contexts"][i]],
-            "answer": [answer_dataset["answer"][i]],
-        }
+        if i >= last_idx:
+            # Print the progress
+            print(f"Evaluating row {i + 1}/{len(answer_dataset['answer'])}", flush=True, end="\r")
+            answer_row = {
+                "question": [answer_dataset["question"][i]],
+                "ground_truth": [answer_dataset["ground_truth"][i]],
+                "retrieved_contexts": [answer_dataset["retrieved_contexts"][i]],
+                "answer": [answer_dataset["answer"][i]],
+            }
 
-        if hyde:
-            answer_row["hypothesis"] = [answer_dataset["hypothesis"][i]]
+            if hyde:
+                answer_row["hypothesis"] = [answer_dataset["hypothesis"][i]]
 
-        # Melakukan penilaian terhadap jawaban dan konteks yang diambil
-        dataset = Dataset.from_dict(answer_row)
-        score = evaluate(
-            dataset,
-            metrics=[
-                faithfulness,
-                answer_relevancy,
-                context_precision,
-                context_recall
-            ],
-            llm=llm,
-            embeddings=embeddings,
-        )
+            # Melakukan penilaian terhadap jawaban dan konteks yang diambil
+            dataset = Dataset.from_dict(answer_row)
+            score = evaluate(
+                dataset,
+                metrics=[
+                    faithfulness,
+                    answer_relevancy,
+                    context_precision,
+                    context_recall
+                ],
+                llm=llm,
+                embeddings=embeddings,
+            )
 
-        # Memasukkan hasil evaluasi ke dalam eval_results
-        eval_results["question"].append(answer_dataset["question"][i])
-        eval_results["ground_truth"].append(answer_dataset["ground_truth"][i])
-        eval_results["retrieved_contexts"].append(answer_dataset["retrieved_contexts"][i])
-        eval_results["answer"].append(answer_dataset["answer"][i])
+            # Memasukkan hasil evaluasi ke dalam eval_results
+            eval_results["question"].append(answer_dataset["question"][i])
+            eval_results["ground_truth"].append(answer_dataset["ground_truth"][i])
+            eval_results["retrieved_contexts"].append(answer_dataset["retrieved_contexts"][i])
+            eval_results["answer"].append(answer_dataset["answer"][i])
 
-        if hyde:
-            eval_results["hypothesis"].append(answer_dataset["hypothesis"][i])
-        
-        eval_results["faithfulness"].append(score['faithfulness'][0])
-        eval_results["answer_relevancy"].append(score['answer_relevancy'][0])
-        eval_results["context_precision"].append(score['context_precision'][0])
-        eval_results["context_recall"].append(score['context_recall'][0])
+            if hyde:
+                eval_results["hypothesis"].append(answer_dataset["hypothesis"][i])
+            
+            eval_results["faithfulness"].append(score['faithfulness'][0])
+            eval_results["answer_relevancy"].append(score['answer_relevancy'][0])
+            eval_results["context_precision"].append(score['context_precision'][0])
+            eval_results["context_recall"].append(score['context_recall'][0])
 
-        # Simpan hasil evaluasi ke dalam file CSV
-        # Hal ini dilakukan tiap iterasi untuk menghindari kehilangan data jika terjadi kesalahan
-        df = pd.DataFrame(eval_results)
+            # Simpan hasil evaluasi ke dalam file CSV
+            # Hal ini dilakukan tiap iterasi untuk menghindari kehilangan data jika terjadi kesalahan
+            df = pd.DataFrame(eval_results)
 
-        df = df.applymap(lambda x: str(x).replace('\n', '\\n'))
+            df = df.applymap(lambda x: str(x).replace('\n', '\\n'))
 
-        df.to_csv(f'../../data/evaluation_result_{config_name}.csv', index=False, sep=',')
+            df.to_csv(f'../../data/evaluation_result_{config_name}.csv', index=False, sep=',')
 
 def main():
     load_dotenv()
