@@ -14,7 +14,7 @@
         "embedding_model": "nomic-embed-text",
         "llm_model": "deepseek-v2",
         "hyde": false,
-        "answer_finished": false,
+        "answer_finished": true,
         "eval_finished": false
     },
     {
@@ -23,7 +23,7 @@
         "embedding_model": "mxbai-embed-large",
         "llm_model": "llama3.1",
         "hyde": false,
-        "answer_finished": false,
+        "answer_finished": true,
         "eval_finished": false
     },
     {
