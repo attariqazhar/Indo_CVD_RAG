@@ -6,7 +6,7 @@
         "llm_model": "llama3.1",
         "hyde": false,
         "answer_finished": true,
-        "eval_finished": false
+        "eval_finished": true
     },
     {
         "name": "combination_2",
@@ -15,7 +15,7 @@
         "llm_model": "deepseek-v2",
         "hyde": false,
         "answer_finished": true,
-        "eval_finished": false
+        "eval_finished": true
     },
     {
         "name": "combination_3",
@@ -24,7 +24,7 @@
         "llm_model": "llama3.1",
         "hyde": false,
         "answer_finished": true,
-        "eval_finished": false
+        "eval_finished": true
     },
     {
         "name": "combination_4",
@@ -33,7 +33,7 @@
         "llm_model": "deepseek-v2",
         "hyde": false,
         "answer_finished": true,
-        "eval_finished": false
+        "eval_finished": true
     },
     {
         "name": "combination_5",
@@ -42,7 +42,7 @@
         "llm_model": "llama3.1",
         "hyde": true,
         "answer_finished": true,
-        "eval_finished": false
+        "eval_finished": true
     },
     {
         "name": "combination_6",
@@ -51,7 +51,7 @@
         "llm_model": "deepseek-v2",
         "hyde": true,
         "answer_finished": true,
-        "eval_finished": false
+        "eval_finished": true
     },
     {
         "name": "combination_7",
@@ -60,7 +60,7 @@
         "llm_model": "llama3.1",
         "hyde": true,
         "answer_finished": true,
-        "eval_finished": false
+        "eval_finished": true
     },
     {
         "name": "combination_8",
@@ -69,6 +69,6 @@
         "llm_model": "deepseek-v2",
         "hyde": true,
         "answer_finished": true,
-        "eval_finished": false
+        "eval_finished": true
     }
 ]

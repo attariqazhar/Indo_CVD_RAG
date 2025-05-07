@@ -11,7 +11,6 @@ from langchain_ollama import OllamaEmbeddings
 # Pipeline
 import pandas as pd
 import sys
-import os
 from dotenv import load_dotenv
 import json
 import time

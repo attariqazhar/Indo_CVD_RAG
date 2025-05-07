@@ -71,7 +71,7 @@ def evaluate_answers(config_name, llm_name, embedding_name, hyde=False):
     for i in range(len(answer_dataset["answer"])):
         if i >= last_idx:
             # Print the progress
-            print(f"Evaluating row {i + 1}/{len(answer_dataset['answer'])}", flush=True, end="\r")
+            print(f"Row {i + 1}/{len(answer_dataset['answer'])}")
             answer_row = {
                 "question": [answer_dataset["question"][i]],
                 "ground_truth": [answer_dataset["ground_truth"][i]],
@@ -114,7 +114,7 @@ def evaluate_answers(config_name, llm_name, embedding_name, hyde=False):
             # Hal ini dilakukan tiap iterasi untuk menghindari kehilangan data jika terjadi kesalahan
             df = pd.DataFrame(eval_results)
 
-            df = df.applymap(lambda x: str(x).replace('\n', '\\n'))
+            df = df.map(lambda x: str(x).replace('\n', '\\n'))
 
             df.to_csv(f'../../data/evaluation_result_{config_name}.csv', index=False, sep=',')
 
