@@ -1,5 +1,5 @@
-
 .env
 models
 data/backup
 __pycache__
+session_state.json

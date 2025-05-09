@@ -3,14 +3,14 @@ import os
 import json
 from dotenv import load_dotenv
 
-from retrieval_generation_pipeline import hypothesis_pipeline, retrieval_pipeline, generation_pipeline
+from RAG.pipeline.retrieval_generation_pipeline import hypothesis_pipeline, retrieval_pipeline, generation_pipeline
 
 load_dotenv()
 url = os.getenv("QDRANT_URL")
 api_key = os.getenv("QDRANT_API_KEY")
 
 # Get topic list from cvd.json
-with open("cvd.json", "r") as f:
+with open("data/cvd.json", "r") as f:
     cvd_data = json.load(f)
 
 topic_list = []
@@ -21,16 +21,19 @@ for topic in cvd_data:
 topic_list.sort()
 
 # Initialize chat history
-with open("session_state.json", "r") as f:
-    try:
+try:
+    with open("session_state.json", "r") as f:
         st.session_state.messages = json.load(f)
-    except json.JSONDecodeError:
-        st.session_state.messages = []
+except FileNotFoundError:
+    st.session_state.messages = []
 
-if "messages" not in st.session_state:
+if len(st.session_state.messages) == 0:
     st.session_state.messages = [
         {"role": "ai", "response": "Halo! Saya adalah chatbot yang siap membantu Anda menjawab pertanyaan seputar penyakit jantung. Silakan ajukan pertanyaan Anda."}
     ]
+
+    with st.chat_message("ai"):
+        st.markdown(st.session_state.messages[0]["response"])
 else:
     # Loop through messages and add them to the chat history
     for message in st.session_state.messages:
@@ -40,6 +43,11 @@ else:
 
                 if "context" in message:
                     with st.expander("🔍 Detail"):
+                        
+                        if message["hypothesis"] is not None:
+                            st.markdown("**Jawaban Hipotesis (AI):**")
+                            st.markdown(message["hypothesis"])
+                        
                         st.markdown("**Konteks Terkait:**")
 
                         for content in message["context"]:
@@ -104,6 +112,11 @@ if query:
 
         # Tambahkan dropdown/expander info teknis
         with st.expander("🔍 Detail"):
+
+            if hyde:
+                st.markdown("**Jawaban Hipotesis (AI):**")
+                st.markdown(hyde_response)
+                
             st.markdown("**Konteks Terkait:**")
 
             for content in contents:
@@ -116,7 +129,7 @@ if query:
                 st.markdown(f"- {source}", unsafe_allow_html=True)
 
     # Simpan ke riwayat sebagai pesan dari AI
-    st.session_state.messages.append({"role": "ai", "response": response, "context": contents, "source": sources})
+    st.session_state.messages.append({"role": "ai", "response": response,"hypothesis":hyde_response,"context": contents, "source": sources})
 
     # Export session state to JSON file
     with open("session_state.json", "w") as f:
